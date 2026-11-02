@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lecture 13 · Changing the App Icon</title>
+  <meta name="description" content="Mobile App Development with Flutter, Lecture 13: Replace the default Flutter icon with your own on Android and iOS from one 1024 × 1024 picture with flutter_launcher_icons, including an Android adaptive icon, and change the name under the icon.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+  <script>document.documentElement.classList.add('js');</script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="flutter-logo" viewBox="0 0 166 210">
+    <path fill="#44D1FD" d="M10 101 100 11h56L38 129z"/>
+    <path fill="#1FBCFD" d="M51 150 100 102h56l-77 76z"/>
+    <path fill="#08589C" d="M79 178 107 150l49 49h-56z"/>
+  </symbol>
+  <symbol id="i-git" viewBox="0 0 24 24"><circle cx="6" cy="18" r="3"/><circle cx="18" cy="6" r="3"/><path d="M6 3v12"/><path d="M18 9a9 9 0 0 1-9 9"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><rect x="5" y="2" width="14" height="20" rx="2.5"/><path d="M11 18h2"/></symbol>
+  <symbol id="i-download" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><path d="M12 15V3"/></symbol>
+  <symbol id="i-windows" viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="1"/><rect x="13" y="3" width="8" height="8" rx="1"/><rect x="3" y="13" width="8" height="8" rx="1"/><rect x="13" y="13" width="8" height="8" rx="1"/></symbol>
+  <symbol id="i-laptop" viewBox="0 0 24 24"><path d="M20 16V7a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v9"/><path d="M2 19.5 4 16h16l2 3.5a1 1 0 0 1-.9 1.5H2.9a1 1 0 0 1-.9-1.5z"/></symbol>
+  <symbol id="i-sparkles" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3z"/><path d="M5 3v4M3 5h4M19 17v4M17 19h4"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><polygon points="6 3 20 12 6 21 6 3"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"/></symbol>
+  <symbol id="i-disk" viewBox="0 0 24 24"><path d="M22 12H2"/><path d="M5.5 5.1 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.5-6.9A2 2 0 0 0 16.8 4H7.2a2 2 0 0 0-1.7 1.1z"/><path d="M6 16h.01M10 16h.01"/></symbol>
+  <symbol id="i-wifi" viewBox="0 0 24 24"><path d="M5 12.6a11 11 0 0 1 14 0"/><path d="M1.4 9a16 16 0 0 1 21.2 0"/><path d="M8.5 16.1a6 6 0 0 1 7 0"/><path d="M12 20h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-bulb" viewBox="0 0 24 24"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.7 1.3 1.5 1.5 2.5"/><path d="M9 18h6M10 22h4"/></symbol>
+  <symbol id="i-info" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></symbol>
+  <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M4 20h16a2 2 0 0 0 2-2V8a2 2 0 0 0-2-2h-7.9a2 2 0 0 1-1.7-.9l-.8-1.2A2 2 0 0 0 7.9 3H4a2 2 0 0 0-2 2v13a2 2 0 0 0 2 2z"/></symbol>
+  <symbol id="i-star" viewBox="0 0 24 24"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></symbol>
+  <symbol id="i-package" viewBox="0 0 24 24"><path d="m7.5 4.3 9 5.1"/><path d="M21 8a2 2 0 0 0-1-1.7l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.7l7 4a2 2 0 0 0 2 0l7-4a2 2 0 0 0 1-1.7z"/><path d="m3.3 7 8.7 5 8.7-5M12 22V12"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-terminal" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><path d="M12 19h8"/></symbol>
+  <symbol id="i-activity" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-mouse" viewBox="0 0 24 24"><path d="m4 4 7 17 2.5-7.5L21 11z"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-chrome" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="4"/><path d="M21.2 8H12M3.9 6.1 8.5 14M10.9 21.9l4.6-7.9"/></symbol>
+  <symbol id="i-cable" viewBox="0 0 24 24"><path d="M17 21v-2a1 1 0 0 1-1-1v-1a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v1a1 1 0 0 1-1 1v2"/><path d="M19 15V6.5a3.5 3.5 0 0 0-7 0v11a3.5 3.5 0 0 1-7 0V9"/><path d="M3 9V5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v4z"/></symbol>
+  <symbol id="i-apple" viewBox="0 0 24 24"><path d="M12 7c-1.5-1.3-4.5-1.6-6 .5-1.6 2.3-1 6.6 1.3 9.9 1 1.4 2 2.6 3.2 2.5.9 0 1.2-.6 1.5-.6s.6.6 1.5.6c1.2.1 2.2-1.1 3.2-2.5 2.3-3.3 2.9-7.6 1.3-9.9-1.5-2.1-4.5-1.8-6-.5z"/><path d="M12 7c0-2 1-3.5 3-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5"/><path d="m2 12 10 5 10-5"/></symbol>
+  <symbol id="i-palette" viewBox="0 0 24 24"><path d="M12 22a10 10 0 1 1 10-10c0 2.8-2.2 4-4 4h-2a2 2 0 0 0-1.5 3.3c.5.6.3 1.7-.5 2.2-.6.3-1.3.5-2 .5z"/><circle cx="7.5" cy="10.5" r="1"/><circle cx="12" cy="7.5" r="1"/><circle cx="16.5" cy="10.5" r="1"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2h-4v-7H9v7H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+  <symbol id="i-heart" viewBox="0 0 24 24"><path d="M19 14c1.5-1.5 3-3.2 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.8 0-3 .5-4.5 2-1.5-1.5-2.7-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4 3 5.5l7 7z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></symbol>
+  <symbol id="i-image" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+  <symbol id="i-map-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-bag" viewBox="0 0 24 24"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></symbol>
+  <symbol id="i-truck" viewBox="0 0 24 24"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a1 1 0 0 0-.22-.62l-3.48-4.35A1 1 0 0 0 17.52 8H14"/><circle cx="17" cy="18" r="2"/><circle cx="7" cy="18" r="2"/></symbol>
+  <symbol id="i-card" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/><path d="M6 15h4"/></symbol>
+  <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/><path d="M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></symbol>
+  <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M12.6 2.6A2 2 0 0 0 11.2 2H4a2 2 0 0 0-2 2v7.2a2 2 0 0 0 .6 1.4l8.7 8.7a2.4 2.4 0 0 0 3.4 0l6.6-6.6a2.4 2.4 0 0 0 0-3.4z"/><circle cx="7.5" cy="7.5" r="1"/></symbol>
+  <symbol id="i-camera" viewBox="0 0 24 24"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3z"/><circle cx="12" cy="13" r="3"/></symbol>
+  <symbol id="i-message" viewBox="0 0 24 24"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22z"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-music" viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></symbol>
+  <symbol id="i-scissors" viewBox="0 0 24 24"><circle cx="6" cy="6" r="3"/><path d="M8.12 8.12 12 12"/><path d="M20 4 8.12 15.88"/><circle cx="6" cy="18" r="3"/><path d="M14.8 14.8 20 20"/></symbol>
+  <symbol id="i-minimize" viewBox="0 0 24 24"><path d="M4 14h6v6"/><path d="M20 10h-6V4"/><path d="m14 10 7-7"/><path d="m3 21 7-7"/></symbol>
+  <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/></symbol>
+</svg>
+
+<div class="progress" aria-hidden="true"><span></span></div>
+
+<main class="deck">
+
+<!-- 01 · Title -->
+<section class="slide">
+  <div class="canvas"><div class="frame frame--title">
+    <div class="stagger">
+      <p class="kicker">Lecture 13 · Mobile App Development</p>
+      <h1 class="hero">Changing the<br><span class="grad-text">App Icon</span></h1>
+      <p class="lead lead--hero">Your app, your icon: one 1024 × 1024 picture becomes every icon Android and iOS need, plus the name under it.</p>
+      <div class="chips">
+        <span class="chip"><span class="avatar">MI</span>Eng. Monther Ibrahim</span>
+        <span class="chip"><span class="avatar">M</span>Muhammad, M.Sc.</span>
+        <span class="chip">Fall 2026</span>
+      </div>
+      <p class="keys"><kbd>→</kbd> next &nbsp;·&nbsp; <kbd>F</kbd> fullscreen &nbsp;·&nbsp; <kbd>N</kbd> notes &nbsp;·&nbsp; <kbd>T</kbd> theme</p>
+    </div>
+    <div class="title-right" aria-hidden="true" style="display:grid; place-items:center;">
+      <div class="logo-glow" style="left:6%; top:10%;"></div>
+      <div style="display:flex; align-items:center; gap:3cqw;">
+        <div class="ph" style="--pw:15cqw;">
+          <div class="ph__scr"><div class="ph__island"></div>
+            <div class="home home--round">
+              <span class="app"><span class="app__g" style="--c:#E53935;"><svg class="ico"><use href="#i-mail"/></svg></span><small>Mail</small></span>
+              <span class="app"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-map-pin"/></svg></span><small>Maps</small></span>
+              <span class="app"><span class="app__g" style="--c:#FB8C00;"><svg class="ico"><use href="#i-image"/></svg></span><small>Photos</small></span>
+              <span class="app"><span class="app__g" style="--c:#546E7A;"><svg class="ico"><use href="#i-gear"/></svg></span><small>Settings</small></span>
+              <span class="app"><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span><small>Camera</small></span>
+              <span class="app is-tag" data-tag="default"><span class="aicon aicon--flutter"><svg class="logo"><use href="#flutter-logo"/></svg></span><small>course_app</small></span>
+              <span class="app"><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><small>Chat</small></span>
+              <span class="app"><span class="app__g" style="--c:#3949AB;"><svg class="ico"><use href="#i-calendar"/></svg></span><small>Calendar</small></span>
+              <span class="app"><span class="app__g" style="--c:#D81B60;"><svg class="ico"><use href="#i-music"/></svg></span><small>Music</small></span>
+              <span class="app"><span class="app__g" style="--c:#5E35B1;"><svg class="ico"><use href="#i-search"/></svg></span><small>Search</small></span>
+              <span class="app"><span class="app__g" style="--c:#1E88E5;"><svg class="ico"><use href="#i-chrome"/></svg></span><small>Browser</small></span>
+              <span class="app"><span class="app__g" style="--c:#E91E63;"><svg class="ico"><use href="#i-heart"/></svg></span><small>Health</small></span>
+            </div>
+            <div class="dock"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-phone"/></svg></span><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><span class="app__g" style="--c:#1E88E5;"><svg class="ico"><use href="#i-chrome"/></svg></span><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span></div>
+          </div>
+        </div>
+        <div style="display:grid; justify-items:center; gap:1cqw;">
+          <span class="aicon aicon--flutter aicon--circle" style="--s:7cqw;"><svg class="logo"><use href="#flutter-logo"/></svg></span>
+          <div class="arrow-mid" style="transform:rotate(90deg);"><svg class="ico"><use href="#i-arrow-right"/></svg></div>
+          <span class="aicon aicon--circle" style="--s:7cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span>
+        </div>
+      </div>
+    </div>
+  </div></div>
+  <aside class="notes"><p>Show the class's own emulators: every app we made this semester has the same blue Flutter icon. Today that changes.</p></aside>
+</section>
+
+<!-- 02 · Learning objectives -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Today</p>
+      <h2 class="title">Learning objectives</h2>
+      <p class="lead">A short, practical lecture: the Tripoli Shop app from Lecture 12 gets its <b>own icon</b> and its <b>own name</b>.</p>
+    </header>
+    <div class="body" style="grid-template-rows: 1fr auto;">
+      <div class="journey stagger">
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-phone"/></svg><span class="stop__n">1</span></div><h3>Explain</h3><p>app icons on Android and iOS, and adaptive icons</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-image"/></svg><span class="stop__n">2</span></div><h3>Prepare</h3><p>a 1024 × 1024 icon picture the right way</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-gear"/></svg><span class="stop__n">3</span></div><h3>Configure</h3><p>install and configure <code>flutter_launcher_icons</code></p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-zap"/></svg><span class="stop__n">4</span></div><h3>Generate</h3><p>all icon sizes with one command</p></div>
+        <div class="stop"><div class="stop__dot"><svg class="ico"><use href="#i-tag"/></svg><span class="stop__n">5</span></div><h3>See it</h3><p>the new icon, and change the app's name</p></div>
+      </div>
+      <div class="callout callout--ok goal"><svg class="ico"><use href="#i-target"/></svg><div><b>Goal:</b> by the end, every phone in the room shows <b>your own icon</b> instead of the blue Flutter logo.</div></div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>A short, practical lecture: by the end, every student's phone shows their own icon.</p></aside>
+</section>
+
+<!-- 03 · What is an app icon -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">App icons</p>
+      <h2 class="title">What is an app icon, and why does it matter?</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1fr 1fr; gap:2.4cqw; align-items:start;">
+      <div class="explain stagger">
+        <div class="say"><p>The picture that opens your app: on the Android <b>launcher</b> (home screen and app list) and the iOS <b>home screen</b>.</p></div>
+        <div class="def"><code>Also in</code><span>Settings, notifications, the recent-apps screen and the app stores</span></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-info"/></svg><div>The <b>first thing</b> users see, before any page of your app.</div></div>
+        <article class="card card--hl">
+          <h3>A good icon</h3>
+          <ul class="checklist" style="grid-template-columns: 1fr 1fr; gap:.9cqw 1.6cqw; margin-top:1cqw;">
+            <li><span>simple</span></li>
+            <li><span>one idea</span></li>
+            <li><span>readable when tiny</span></li>
+            <li><span>same colors as the app</span></li>
+          </ul>
+        </article>
+      </div>
+      <article class="card" style="display:grid; gap:1.4cqw; align-content:start;">
+        <div class="sizes">
+          <span class="badge badge--warm">Detailed</span>
+          <div class="size"><span class="aicon aicon--busy" style="--s:9.6cqw;"><span class="busy"><b>TRIPOLI SHOP</b><span>online store since 2020</span><span class="busy__ico"><svg class="ico"><use href="#i-bag"/></svg><svg class="ico"><use href="#i-truck"/></svg><svg class="ico"><use href="#i-card"/></svg></span><span>fast delivery</span></span></span><small>192 px</small></div>
+          <div class="size"><span class="aicon aicon--busy" style="--s:4.8cqw;"><span class="busy"><b>TRIPOLI SHOP</b><span>online store since 2020</span><span class="busy__ico"><svg class="ico"><use href="#i-bag"/></svg><svg class="ico"><use href="#i-truck"/></svg><svg class="ico"><use href="#i-card"/></svg></span><span>fast delivery</span></span></span><small>96 px</small></div>
+          <div class="size"><span class="aicon aicon--busy" style="--s:2.4cqw;"><span class="busy"><b>TRIPOLI SHOP</b><span>online store since 2020</span><span class="busy__ico"><svg class="ico"><use href="#i-bag"/></svg><svg class="ico"><use href="#i-truck"/></svg><svg class="ico"><use href="#i-card"/></svg></span><span>fast delivery</span></span></span><small>48 px</small></div>
+          <span class="badge badge--ok">Simple</span>
+          <div class="size"><span class="aicon" style="--s:9.6cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>192 px</small></div>
+          <div class="size"><span class="aicon" style="--s:4.8cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>96 px</small></div>
+          <div class="size"><span class="aicon" style="--s:2.4cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>48 px</small></div>
+        </div>
+        <p class="small">Small sizes turn the details into a blur. The simple icon stays clear.</p>
+      </article>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Ask students to name apps they recognize only by icon color. Icons work like a logo on a shop in Tripoli: people find you by it.</p></aside>
+</section>
+
+<!-- 04 · Adaptive icons -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Android</p>
+      <h2 class="title">Android adaptive icons</h2>
+    </header>
+    <div class="body" style="grid-template-columns: auto 1fr; gap:3cqw; align-items:start;">
+      <article class="card" style="display:grid; gap:1.6cqw; align-content:start;">
+        <div style="display:flex; align-items:center; gap:1.6cqw;">
+          <div class="layers">
+            <div class="layer layer--bg"></div>
+            <div class="layer layer--fg checker"><span class="ts-mark" style="--k:.44;"><svg class="ico"><use href="#i-bag"/></svg></span><span class="safe"></span></div>
+          </div>
+          <div style="display:grid; gap:3cqw;">
+            <div class="layer-lbl"><b>Foreground</b><span>the logo on transparent</span></div>
+            <div class="layer-lbl"><b>Background</b><span>a color: our blue</span></div>
+          </div>
+        </div>
+        <div style="display:grid; gap:.8cqw;">
+          <p class="small muted"><svg class="ico" style="vertical-align:-.15em; color:var(--sky);"><use href="#i-scissors"/></svg> different Android phones cut different shapes:</p>
+          <div class="masks stagger">
+            <div class="size"><span class="aicon aicon--circle" style="--s:5.6cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>circle</small></div>
+            <div class="size"><span class="aicon" style="--s:5.6cqw; border-radius:18%;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>rounded square</small></div>
+            <div class="size"><span class="aicon aicon--squircle" style="--s:5.6cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>squircle</small></div>
+            <div class="size" style="padding-left:2cqw; border-left:1px solid var(--brd-strong);"><span class="aicon" style="--s:5.6cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>iOS: always this</small></div>
+          </div>
+        </div>
+      </article>
+      <div class="explain stagger">
+        <div class="say"><p>Since <b>Android 8</b>, an icon is <b>two layers</b>; the phone cuts the shape (the <b>mask</b>).</p></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-target"/></svg><div>Only the middle of the foreground is always visible: the <b>safe zone</b>, a circle about <b>60 %</b> of the width (dashed).</div></div>
+        <div class="callout"><svg class="ico"><use href="#i-phone"/></svg><div>Old phones use a normal <b>square</b> icon, so we make both.</div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>A logo that touches the edges gets <b>cut off</b>. Keep it small and centered in the foreground picture.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>That is why logos that touch the edges get cut off on Android. Keep the logo small and centered in the foreground picture.</p></aside>
+</section>
+
+<!-- 05 · Prepare the pictures -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Prepare</p>
+      <h2 class="title">Prepare the pictures</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1.45fr 1fr; gap:2.4cqw; align-items:start;">
+      <div class="side">
+        <div class="card tree tree--wide">
+          <div class="row"><span><span class="d">assets/</span></span><span class="note"></span></div>
+          <div class="row"><span><span class="g">└─ </span><span class="d">icon/</span></span><span class="note"></span></div>
+          <div class="row is-star"><span><span class="g">   ├─ </span><span class="f">app_icon.png</span></span><span class="note">1024 × 1024, no transparency</span></div>
+          <div class="row is-star"><span><span class="g">   └─ </span><span class="f">app_icon_foreground.png</span></span><span class="note">1024 × 1024, transparent, logo in the middle</span></div>
+        </div>
+        <div class="stagger" style="display:flex; gap:3cqw; justify-content:center;">
+          <div class="srcpic"><span class="aicon aicon--square" style="--s:11cqw;"><span class="ts-mark" style="--k:.58;"><svg class="ico"><use href="#i-bag"/></svg></span></span><code>app_icon.png</code><small>full icon, own background</small></div>
+          <div class="srcpic"><span class="aicon aicon--square checker" style="--s:11cqw;"><span class="ts-mark" style="--k:.44;"><svg class="ico"><use href="#i-bag"/></svg></span><span class="safe"></span></span><code>app_icon_foreground.png</code><small>logo inside the safe zone</small></div>
+        </div>
+      </div>
+      <div class="explain stagger">
+        <div class="def"><code>PNG</code><span>square, <b>1024 × 1024</b></span></div>
+        <div class="def"><code>app_icon.png</code><span>full icon with its own background (used by iOS and old Android); <b>no transparency</b>, Apple rejects icons with it</span></div>
+        <div class="def"><code>…_foreground.png</code><span>only the logo, transparent around it, inside the <b>middle 60 %</b></span></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-palette"/></svg><div>Background color for Android: our blue <code>#0D47A1</code>.</div></div>
+        <div class="callout callout--ok"><svg class="ico"><use href="#i-bulb"/></svg><div>Any tool works: Canva, Figma, even PowerPoint (export as PNG). Use the <b>same logo</b> as the Lecture 12 splash.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Any tool works: Canva, Figma, even PowerPoint (export as PNG). Check the size in the file's properties. These pictures are only for the tool, so they do not need to be listed under <code>assets:</code> in <code>pubspec.yaml</code>. Use the same logo as the Lecture 12 splash, so the icon and the splash match.</p></aside>
+</section>
+
+<!-- 06 · flutter_launcher_icons install -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">The tool</p>
+      <h2 class="title"><code>flutter_launcher_icons</code>: what it does, install</h2>
+    </header>
+    <div class="body walk">
+      <div class="explain">
+        <div class="card fanout">
+          <div class="srcpic"><span class="aicon aicon--square" style="--s:6.4cqw;"><span class="ts-mark" style="--k:.58;"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>1024 × 1024</small></div>
+          <div class="arrow-mid"><svg class="ico"><use href="#i-arrow-right"/></svg></div>
+          <div class="fan-rows">
+            <div><small>Android · 48 → 192 px</small>
+              <div class="fan-row"><span class="aicon aicon--circle" style="--s:1.6cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon aicon--circle" style="--s:2.1cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon aicon--circle" style="--s:2.6cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon aicon--circle" style="--s:3.2cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon aicon--circle" style="--s:3.8cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span></div>
+            </div>
+            <div><small>iOS · 20 → 1024 px</small>
+              <div class="fan-row"><span class="aicon" style="--s:1.1cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon" style="--s:1.5cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon" style="--s:2cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon" style="--s:2.5cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon" style="--s:3.1cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><span class="aicon" style="--s:3.8cqw;"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="defs stagger">
+          <div class="def"><code>In → out</code><span><b>One picture in, every size out</b>: Android 48 to 192 px, iOS 20 to 1024 px</span></div>
+          <div class="def"><code>Adaptive</code><span>also writes the Android adaptive icon files</span></div>
+          <div class="def"><code>--dev</code><span>a <b>dev dependency</b>: we run it on our computer; it is not inside the app</span></div>
+        </div>
+      </div>
+      <div class="side">
+        <div class="term"><div class="term__bar"><i></i><i></i><i></i><span>Terminal</span></div><pre style="font-size:1.25cqw;"><span class="t-p">$</span> flutter pub add --dev flutter_launcher_icons</pre></div>
+        <div class="term code code--lg">
+          <div class="term__bar"><i></i><i></i><i></i><span>pubspec.yaml</span><span class="grow"></span><span>added by the command</span></div>
+<pre class="hl" data-lang="yaml" data-hl="2">dev_dependencies:
+  flutter_launcher_icons: ^0.14.4</pre>
+        </div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-info"/></svg><div>Same idea as <code>flutter_native_splash</code> in Lecture 12: <code>--dev</code> puts it under <code>dev_dependencies</code>.</div></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>By hand: Android needs 5 sizes (plus adaptive files), iOS about 20. Slow and easy to get wrong.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Same idea as <code>flutter_native_splash</code> in Lecture 12: <code>--dev</code> puts it under <code>dev_dependencies</code>. Show the line in <code>pubspec.yaml</code> after running the command.</p></aside>
+</section>
+
+<!-- 07 · Configure -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Configure</p>
+      <h2 class="title">Configure it in <code>pubspec.yaml</code></h2>
+    </header>
+    <div class="body walk" style="grid-template-columns: 1.2fr .8fr;">
+      <div class="side">
+        <div class="term code">
+          <div class="term__bar"><i></i><i></i><i></i><span>pubspec.yaml</span><span class="grow"></span><span>at the end, not inside flutter:</span></div>
+<pre class="hl" data-lang="yaml" data-groups="2-3:g1;4:g2;5:g4;6-7:g3">flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/icon/app_icon.png"
+  remove_alpha_ios: true
+  adaptive_icon_background: "#0D47A1"
+  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"</pre>
+        </div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>Indentation matters in YAML: the block starts at the <b>left edge</b>, with <b>two spaces</b> before each key.</div></div>
+        <div class="callout"><svg class="ico"><use href="#i-info"/></svg><div>Optional: <code>min_sdk_android</code> (default 21, fine to leave out) and <code>adaptive_icon_foreground_inset</code> (default 16 %, extra space around the foreground).</div></div>
+      </div>
+      <div class="legend-groups stagger">
+        <div class="lg" style="--c:#13B9FD;"><span class="n">1</span><b>android / ios: true</b><span>replace the default icon</span></div>
+        <div class="lg" style="--c:#FFC857;"><span class="n">2</span><b>image_path</b><span>the full picture</span></div>
+        <div class="lg" style="--c:#4ADE80;"><span class="n">3</span><b>adaptive_icon_…</b><span><code>adaptive_icon_background</code> + <code>adaptive_icon_foreground</code>: the two Android layers (<b>both</b> are needed)</span></div>
+        <div class="lg" style="--c:#C792EA;"><span class="n">4</span><b>remove_alpha_ios: true</b><span>makes sure iOS gets no transparency</span></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Indentation matters in YAML: two spaces under <code>flutter_launcher_icons:</code>. Optional keys: <code>min_sdk_android</code> (default 21, fine to leave out) and <code>adaptive_icon_foreground_inset</code> (default 16 %, extra space around the foreground). <code>dart run flutter_launcher_icons:generate</code> can also create a starter <code>flutter_launcher_icons.yaml</code> with all keys commented.</p></aside>
+</section>
+
+<!-- 08 · Generate -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Generate</p>
+      <h2 class="title">Generate, and see what it wrote</h2>
+    </header>
+    <div class="body" style="grid-template-columns: auto 1fr; gap:2cqw; align-items:start;">
+      <div class="card tree tree--files">
+        <div class="row"><span><span class="d">android/app/src/main/res/</span></span><span class="note"></span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">mipmap-mdpi … mipmap-xxxhdpi/</span><span class="f">ic_launcher.png</span></span><span class="note">48 → 192 px</span></div>
+        <div class="row is-star"><span><span class="g">├─ </span><span class="d">mipmap-anydpi-v26/</span><span class="f">ic_launcher.xml</span></span><span class="note">adaptive icon</span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="d">drawable-mdpi … drawable-xxxhdpi/</span></span><span class="note"></span></div>
+        <div class="row"><span><span class="g">│     </span><span class="f">ic_launcher_foreground.png</span></span><span class="note">108 → 432 px</span></div>
+        <div class="row"><span><span class="g">└─ </span><span class="d">values/</span><span class="f">colors.xml</span></span><span class="note">the blue background</span></div>
+        <div class="row"><span><span class="d">ios/Runner/Assets.xcassets/AppIcon.appiconset/</span></span><span class="note"></span></div>
+        <div class="row"><span><span class="g">├─ </span><span class="f">Icon-App-20x20@1x.png … Icon-App-1024x1024@1x.png</span></span><span class="note">(21 files)</span></div>
+        <div class="row"><span><span class="g">└─ </span><span class="f">Contents.json</span></span><span class="note"></span></div>
+      </div>
+      <div class="side">
+        <div class="term"><div class="term__bar"><i></i><i></i><i></i><span>Terminal</span></div><pre style="font-size:1.02cqw;"><span class="t-p">$</span> dart run flutter_launcher_icons
+<span class="t-dim">• Creating default icons Android</span>
+<span class="t-dim">• Creating adaptive icons Android</span>
+<span class="t-dim">…</span>
+<span class="t-dim">• Overwriting default iOS launcher icon with new icon</span>
+<span class="t-dim">No platform provided</span>
+<span class="t-ok">✓ Successfully generated launcher icons</span></pre></div>
+        <div class="callout"><svg class="ico"><use href="#i-info"/></svg><div>"No platform provided" is normal: it is about web / Windows / macOS, which we did not ask for.</div></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-layers"/></svg><div>Open <code>ic_launcher.xml</code>: the two layers, background and foreground.</div></div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>The terminal shows "Creating default icons Android", "Creating adaptive icons Android", "Overwriting default iOS launcher icon with new icon" and "✓ Successfully generated launcher icons". The line "No platform provided" is normal: it is about web / Windows / macOS, which we did not ask for. Open <code>mipmap-anydpi-v26/ic_launcher.xml</code> to show the two layers. If you use Git, it also shows a small change in <code>ios/Runner.xcodeproj/project.pbxproj</code>, made by the tool.</p></aside>
+</section>
+
+<!-- 09 · See the new icon -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">On the phone</p>
+      <h2 class="title">See the new icon on the phone</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1fr auto; gap:2.4cqw; align-items:start;">
+      <div class="explain">
+        <div class="say"><p>Icons are copied to the phone only when the app is <b>installed</b>.</p></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>Hot reload / hot restart do <b>not</b> change the icon.</div></div>
+        <ol class="steps bigsteps stagger">
+          <li><span><b>Stop</b> the app</span></li>
+          <li><span><b>Uninstall</b> it from the emulator or phone</span></li>
+          <li><span><code>flutter run</code> again</span></li>
+        </ol>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-refresh"/></svg><div>Still the old icon? Restart the emulator; on iOS also delete the app and run again.</div></div>
+      </div>
+      <div class="phones stagger" style="gap:1.6cqw;">
+        <div class="ph-col">
+          <span class="badge">Before</span>
+          <div class="ph" style="--pw:10cqw;">
+            <div class="ph__scr"><div class="ph__island"></div>
+              <div class="home home--round home--big">
+                <span class="app"><span class="app__g" style="--c:#E53935;"><svg class="ico"><use href="#i-mail"/></svg></span><small>Mail</small></span>
+                <span class="app"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-map-pin"/></svg></span><small>Maps</small></span>
+                <span class="app"><span class="app__g" style="--c:#FB8C00;"><svg class="ico"><use href="#i-image"/></svg></span><small>Photos</small></span>
+                <span class="app"><span class="app__g" style="--c:#546E7A;"><svg class="ico"><use href="#i-gear"/></svg></span><small>Settings</small></span>
+                <span class="app is-tag" data-tag="old"><span class="aicon aicon--flutter"><svg class="logo"><use href="#flutter-logo"/></svg></span><small>course_app</small></span>
+                <span class="app"><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><small>Chat</small></span>
+                <span class="app"><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span><small>Camera</small></span>
+                <span class="app"><span class="app__g" style="--c:#3949AB;"><svg class="ico"><use href="#i-calendar"/></svg></span><small>Calendar</small></span>
+                <span class="app"><span class="app__g" style="--c:#D81B60;"><svg class="ico"><use href="#i-music"/></svg></span><small>Music</small></span>
+              </div>
+              <div class="dock"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-phone"/></svg></span><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><span class="app__g" style="--c:#1E88E5;"><svg class="ico"><use href="#i-chrome"/></svg></span><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ph-col">
+          <span class="badge badge--ok">After · Android</span>
+          <div class="ph" style="--pw:10cqw;">
+            <div class="ph__scr"><div class="ph__island"></div>
+              <div class="home home--round home--big">
+                <span class="app"><span class="app__g" style="--c:#E53935;"><svg class="ico"><use href="#i-mail"/></svg></span><small>Mail</small></span>
+                <span class="app"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-map-pin"/></svg></span><small>Maps</small></span>
+                <span class="app"><span class="app__g" style="--c:#FB8C00;"><svg class="ico"><use href="#i-image"/></svg></span><small>Photos</small></span>
+                <span class="app"><span class="app__g" style="--c:#546E7A;"><svg class="ico"><use href="#i-gear"/></svg></span><small>Settings</small></span>
+                <span class="app is-tag" data-tag="new"><span class="aicon"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>course_app</small></span>
+                <span class="app"><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><small>Chat</small></span>
+                <span class="app"><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span><small>Camera</small></span>
+                <span class="app"><span class="app__g" style="--c:#3949AB;"><svg class="ico"><use href="#i-calendar"/></svg></span><small>Calendar</small></span>
+                <span class="app"><span class="app__g" style="--c:#D81B60;"><svg class="ico"><use href="#i-music"/></svg></span><small>Music</small></span>
+              </div>
+              <div class="dock"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-phone"/></svg></span><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><span class="app__g" style="--c:#1E88E5;"><svg class="ico"><use href="#i-chrome"/></svg></span><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+        <div class="ph-col">
+          <span class="badge badge--ok">After · iOS</span>
+          <div class="ph" style="--pw:10cqw;">
+            <div class="ph__scr"><div class="ph__island"></div>
+              <div class="home home--big">
+                <span class="app"><span class="app__g" style="--c:#E53935;"><svg class="ico"><use href="#i-mail"/></svg></span><small>Mail</small></span>
+                <span class="app"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-map-pin"/></svg></span><small>Maps</small></span>
+                <span class="app"><span class="app__g" style="--c:#FB8C00;"><svg class="ico"><use href="#i-image"/></svg></span><small>Photos</small></span>
+                <span class="app"><span class="app__g" style="--c:#546E7A;"><svg class="ico"><use href="#i-gear"/></svg></span><small>Settings</small></span>
+                <span class="app is-tag" data-tag="new"><span class="aicon"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>course_app</small></span>
+                <span class="app"><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><small>Chat</small></span>
+                <span class="app"><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span><small>Camera</small></span>
+                <span class="app"><span class="app__g" style="--c:#3949AB;"><svg class="ico"><use href="#i-calendar"/></svg></span><small>Calendar</small></span>
+                <span class="app"><span class="app__g" style="--c:#D81B60;"><svg class="ico"><use href="#i-music"/></svg></span><small>Music</small></span>
+              </div>
+              <div class="dock"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-phone"/></svg></span><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><span class="app__g" style="--c:#1E88E5;"><svg class="ico"><use href="#i-chrome"/></svg></span><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>On Android, long-press the app icon → App info → Uninstall, or drag it to "Uninstall". Phone launchers keep icons in a cache, which is why uninstalling helps. Compare two emulators with different icon shapes to show the adaptive icon at work.</p></aside>
+</section>
+
+<!-- 10 · Change the name -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Bonus</p>
+      <h2 class="title">Bonus: change the app's name</h2>
+    </header>
+    <div class="body" style="grid-template-columns: 1fr .8fr auto; gap:2cqw; align-items:start;">
+      <div class="side">
+        <div class="term code code--lg">
+          <div class="term__bar"><i></i><i></i><i></i><span>android/app/src/main/AndroidManifest.xml</span></div>
+<pre class="hl" data-hl="2">&lt;application
+    android:label="Tripoli Shop"
+    android:name="${applicationName}"
+    android:icon="@mipmap/ic_launcher"&gt;</pre>
+        </div>
+        <div class="term code code--lg">
+          <div class="term__bar"><i></i><i></i><i></i><span>ios/Runner/Info.plist</span></div>
+<pre class="hl">&lt;key&gt;CFBundleDisplayName&lt;/key&gt;
+&lt;string&gt;Tripoli Shop&lt;/string&gt;</pre>
+        </div>
+      </div>
+      <div class="explain stagger">
+        <div class="say"><p>This is the name <b>under the icon</b> (default: the project name, like <code>course_app</code>).</p></div>
+        <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div><b>Stop</b> and run again (uninstall if it does not change).</div></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-info"/></svg><div>Change only <code>android:label</code> and <code>CFBundleDisplayName</code>, not the package name or <code>CFBundleName</code>.</div></div>
+        <div class="callout callout--ok"><svg class="ico"><use href="#i-globe"/></svg><div>Arabic works too: <code>android:label="متجر طرابلس"</code></div></div>
+      </div>
+      <div class="ph" style="--pw:12.5cqw;">
+        <div class="ph__scr"><div class="ph__island"></div>
+          <div class="home home--round home--big">
+            <span class="app"><span class="app__g" style="--c:#E53935;"><svg class="ico"><use href="#i-mail"/></svg></span><small>Mail</small></span>
+            <span class="app"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-map-pin"/></svg></span><small>Maps</small></span>
+            <span class="app"><span class="app__g" style="--c:#FB8C00;"><svg class="ico"><use href="#i-image"/></svg></span><small>Photos</small></span>
+            <span class="app"><span class="app__g" style="--c:#546E7A;"><svg class="ico"><use href="#i-gear"/></svg></span><small>Settings</small></span>
+            <span class="app is-tag" data-tag="android:label"><span class="aicon"><span class="ts-mark"><svg class="ico"><use href="#i-bag"/></svg></span></span><small>Tripoli Shop</small></span>
+            <span class="app"><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><small>Chat</small></span>
+            <span class="app"><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span><small>Camera</small></span>
+            <span class="app"><span class="app__g" style="--c:#3949AB;"><svg class="ico"><use href="#i-calendar"/></svg></span><small>Calendar</small></span>
+            <span class="app"><span class="app__g" style="--c:#D81B60;"><svg class="ico"><use href="#i-music"/></svg></span><small>Music</small></span>
+          </div>
+          <div class="dock"><span class="app__g" style="--c:#43A047;"><svg class="ico"><use href="#i-phone"/></svg></span><span class="app__g" style="--c:#00897B;"><svg class="ico"><use href="#i-message"/></svg></span><span class="app__g" style="--c:#1E88E5;"><svg class="ico"><use href="#i-chrome"/></svg></span><span class="app__g" style="--c:#455A64;"><svg class="ico"><use href="#i-camera"/></svg></span></div>
+        </div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Only change <code>android:label</code> and <code>CFBundleDisplayName</code>, not the package name or <code>CFBundleName</code>. Arabic works too: <code>android:label="متجر طرابلس"</code>. A name that changes with the phone's language needs extra native files; we do not need that today.</p></aside>
+</section>
+
+<!-- 11 · Summary -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Wrap-up</p>
+      <h2 class="title">Summary + Questions</h2>
+    </header>
+    <div class="body wrap">
+      <article class="card card--hl">
+        <h3>Today you learned</h3>
+        <ul class="checklist stagger" style="gap:1.2cqw; margin-top:1.3cqw;">
+          <li><span>App icon = the first thing users see; Android adaptive icons have <b>two layers</b> and a <b>safe zone</b></span></li>
+          <li><span>Pictures: 1024 × 1024 PNG; iOS without transparency; foreground small and centered</span></li>
+          <li><span><code>flutter pub add --dev flutter_launcher_icons</code> → config in <code>pubspec.yaml</code> → <code>dart run flutter_launcher_icons</code></span></li>
+          <li><span>Files: <code>mipmap-*</code> and <code>mipmap-anydpi-v26</code> (Android), <code>AppIcon.appiconset</code> (iOS)</span></li>
+          <li><span>To see it: uninstall, run again · Name: <code>android:label</code>, <code>CFBundleDisplayName</code></span></li>
+        </ul>
+      </article>
+      <div class="side">
+        <details class="qcard">
+          <summary><span class="qn">1</span><span>Why did the logo get cut on Android?<small>Click to see the answer</small></span></summary>
+          <div class="ans">It was outside the safe zone.</div>
+        </details>
+        <details class="qcard">
+          <summary><span class="qn">2</span><span>Why does the icon not change after hot reload?<small>Click to see the answer</small></span></summary>
+          <div class="ans">Icons are installed with the app.</div>
+        </details>
+        <div class="qa__big grad-text" style="font-size:4.2cqw;">Questions?</div>
+      </div>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>Quick check: "Why did the logo get cut on Android?" (It was outside the safe zone.) "Why does the icon not change after hot reload?" (Icons are installed with the app.)</p></aside>
+</section>
+
+<!-- 12 · Homework -->
+<section class="slide">
+  <div class="canvas"><div class="frame">
+    <header class="head">
+      <p class="kicker">Practice</p>
+      <h2 class="title">Homework</h2>
+    </header>
+    <div class="body stagger" style="grid-template-columns: repeat(3, 1fr); align-content:start; gap:1.4cqw;">
+      <article class="card" style="display:grid; gap:.8cqw; align-content:start;">
+        <div style="display:flex; align-items:center; gap:.9cqw;"><span class="itile"><svg class="ico"><use href="#i-image"/></svg></span><span class="badge badge--ok">1 · Easy</span></div>
+        <h3>Give your own course app an icon</h3>
+        <p>both platforms</p>
+      </article>
+      <article class="card" style="display:grid; gap:.8cqw; align-content:start;">
+        <div style="display:flex; align-items:center; gap:.9cqw;"><span class="itile"><svg class="ico"><use href="#i-minimize"/></svg></span><span class="badge badge--ok">2 · Easy</span></div>
+        <h3>Make the foreground smaller</h3>
+        <p>with <code>adaptive_icon_foreground_inset</code></p>
+      </article>
+      <article class="card" style="display:grid; gap:.8cqw; align-content:start;">
+        <div style="display:flex; align-items:center; gap:.9cqw;"><span class="itile"><svg class="ico"><use href="#i-copy"/></svg></span><span class="badge">3 · Medium</span></div>
+        <h3>Test the adaptive icon</h3>
+        <p>on two different emulators</p>
+      </article>
+      <article class="card" style="display:grid; gap:.8cqw; align-content:start;">
+        <div style="display:flex; align-items:center; gap:.9cqw;"><span class="itile"><svg class="ico"><use href="#i-tag"/></svg></span><span class="badge badge--ok">4 · Easy</span></div>
+        <h3>Rename your app under the icon</h3>
+        <p>on Android and iOS</p>
+      </article>
+      <article class="card card--hl" style="display:grid; gap:.8cqw; align-content:start;">
+        <div style="display:flex; align-items:center; gap:.9cqw;"><span class="itile"><svg class="ico"><use href="#i-palette"/></svg></span><span class="badge badge--warm">5 · Bonus</span></div>
+        <h3>A monochrome icon</h3>
+        <p>for Android 13 themed icons</p>
+      </article>
+    </div>
+    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+  </div></div>
+  <aside class="notes"><p>1) Design an icon for your course app, export both pictures, configure and run the tool; done when it shows on an Android emulator and (with a Mac) on the iOS simulator. 2) Set <code>adaptive_icon_foreground_inset</code> to <code>25</code>, run the tool again, uninstall and run; done when you can describe how the logo changed inside the shape and picked the value that looks best. 3) Run the app on two emulators with different icon shapes; done when you have two screenshots and nothing important is cut off.</p><p>4) Change the name under the icon on Android and iOS; done when the home screen shows the new name. 5) A one-color (white on transparent) logo, <code>adaptive_icon_monochrome: "assets/icon/app_icon_monochrome.png"</code>, run the tool again; done when, on Android 13+ with "Themed icons" on, your icon changes color with the wallpaper.</p></aside>
+</section>
+
+</main>
+
+<div class="notes-panel" hidden>
+  <h4 class="np-title">Speaker notes</h4>
+  <div class="np-body"></div>
+</div>
+<div class="hint" aria-hidden="true"><kbd>←</kbd> <kbd>→</kbd> navigate · <kbd>F</kbd> fullscreen · <kbd>N</kbd> notes · <kbd>T</kbd> theme</div>
+
+<script src="js/deck.js"></script>
+</body>
+</html>
