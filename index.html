@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Lecture 13 · Changing the App Icon</title>
-  <meta name="description" content="Mobile App Development with Flutter, Lecture 13: Replace the default Flutter icon with your own on Android and iOS from one 1024 × 1024 picture with flutter_launcher_icons, including an Android adaptive icon, and change the name under the icon.">
+  <title>Lecture 20 · Changing the App Icon</title>
+  <meta name="description" content="Mobile App Development with Flutter, Lecture 20: Replace the default Flutter icon with your own on Android and iOS from one 1024 × 1024 picture with flutter_launcher_icons, including an Android adaptive icon, and change the name under the icon.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600&amp;family=Sora:wght@600;700&amp;display=swap" rel="stylesheet">
@@ -87,7 +87,7 @@
 <section class="slide">
   <div class="canvas"><div class="frame frame--title">
     <div class="stagger">
-      <p class="kicker">Lecture 13 · Mobile App Development</p>
+      <p class="kicker">Lecture 20 · Mobile App Development</p>
       <h1 class="hero">Changing the<br><span class="grad-text">App Icon</span></h1>
       <p class="lead lead--hero">Your app, your icon: one 1024 × 1024 picture becomes every icon Android and iOS need, plus the name under it.</p>
       <div class="chips">
@@ -136,7 +136,7 @@
     <header class="head">
       <p class="kicker">Today</p>
       <h2 class="title">Learning objectives</h2>
-      <p class="lead">A short, practical lecture: the Tripoli Shop app from Lecture 12 gets its <b>own icon</b> and its <b>own name</b>.</p>
+      <p class="lead">A short, practical lecture: the Tripoli Shop app from Lecture 19 gets its <b>own icon</b> and its <b>own name</b>.</p>
     </header>
     <div class="body" style="grid-template-rows: 1fr auto;">
       <div class="journey stagger">
@@ -148,7 +148,7 @@
       </div>
       <div class="callout callout--ok goal"><svg class="ico"><use href="#i-target"/></svg><div><b>Goal:</b> by the end, every phone in the room shows <b>your own icon</b> instead of the blue Flutter logo.</div></div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>A short, practical lecture: by the end, every student's phone shows their own icon.</p></aside>
 </section>
@@ -189,7 +189,7 @@
         <p class="small">Small sizes turn the details into a blur. The simple icon stays clear.</p>
       </article>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>Ask students to name apps they recognize only by icon color. Icons work like a logo on a shop in Tripoli: people find you by it.</p></aside>
 </section>
@@ -230,7 +230,7 @@
         <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>A logo that touches the edges gets <b>cut off</b>. Keep it small and centered in the foreground picture.</div></div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>That is why logos that touch the edges get cut off on Android. Keep the logo small and centered in the foreground picture.</p></aside>
 </section>
@@ -260,12 +260,12 @@
         <div class="def"><code>app_icon.png</code><span>full icon with its own background (used by iOS and old Android); <b>no transparency</b>, Apple rejects icons with it</span></div>
         <div class="def"><code>…_foreground.png</code><span>only the logo, transparent around it, inside the <b>middle 60 %</b></span></div>
         <div class="callout callout--info"><svg class="ico"><use href="#i-palette"/></svg><div>Background color for Android: our blue <code>#0D47A1</code>.</div></div>
-        <div class="callout callout--ok"><svg class="ico"><use href="#i-bulb"/></svg><div>Any tool works: Canva, Figma, even PowerPoint (export as PNG). Use the <b>same logo</b> as the Lecture 12 splash.</div></div>
+        <div class="callout callout--ok"><svg class="ico"><use href="#i-bulb"/></svg><div>Any tool works: Canva, Figma, even PowerPoint (export as PNG). Use the <b>same logo</b> as the Lecture 19 splash.</div></div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>Any tool works: Canva, Figma, even PowerPoint (export as PNG). Check the size in the file's properties. These pictures are only for the tool, so they do not need to be listed under <code>assets:</code> in <code>pubspec.yaml</code>. Use the same logo as the Lecture 12 splash, so the icon and the splash match.</p></aside>
+  <aside class="notes"><p>Any tool works: Canva, Figma, even PowerPoint (export as PNG). Check the size in the file's properties. These pictures are only for the tool, so they do not need to be listed under <code>assets:</code> in <code>pubspec.yaml</code>. Use the same logo as the Lecture 19 splash, so the icon and the splash match.</p></aside>
 </section>
 
 <!-- 06 · flutter_launcher_icons install -->
@@ -302,13 +302,13 @@
 <pre class="hl" data-lang="yaml" data-hl="2">dev_dependencies:
   flutter_launcher_icons: ^0.14.4</pre>
         </div>
-        <div class="callout callout--info"><svg class="ico"><use href="#i-info"/></svg><div>Same idea as <code>flutter_native_splash</code> in Lecture 12: <code>--dev</code> puts it under <code>dev_dependencies</code>.</div></div>
+        <div class="callout callout--info"><svg class="ico"><use href="#i-info"/></svg><div>Same idea as <code>flutter_native_splash</code> in Lecture 19: <code>--dev</code> puts it under <code>dev_dependencies</code>.</div></div>
         <div class="callout callout--warn"><svg class="ico"><use href="#i-alert"/></svg><div>By hand: Android needs 5 sizes (plus adaptive files), iOS about 20. Slow and easy to get wrong.</div></div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
-  <aside class="notes"><p>Same idea as <code>flutter_native_splash</code> in Lecture 12: <code>--dev</code> puts it under <code>dev_dependencies</code>. Show the line in <code>pubspec.yaml</code> after running the command.</p></aside>
+  <aside class="notes"><p>Same idea as <code>flutter_native_splash</code> in Lecture 19: <code>--dev</code> puts it under <code>dev_dependencies</code>. Show the line in <code>pubspec.yaml</code> after running the command.</p></aside>
 </section>
 
 <!-- 07 · Configure -->
@@ -340,7 +340,7 @@
         <div class="lg" style="--c:#C792EA;"><span class="n">4</span><b>remove_alpha_ios: true</b><span>makes sure iOS gets no transparency</span></div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>Indentation matters in YAML: two spaces under <code>flutter_launcher_icons:</code>. Optional keys: <code>min_sdk_android</code> (default 21, fine to leave out) and <code>adaptive_icon_foreground_inset</code> (default 16 %, extra space around the foreground). <code>dart run flutter_launcher_icons:generate</code> can also create a starter <code>flutter_launcher_icons.yaml</code> with all keys commented.</p></aside>
 </section>
@@ -376,7 +376,7 @@
         <div class="callout callout--info"><svg class="ico"><use href="#i-layers"/></svg><div>Open <code>ic_launcher.xml</code>: the two layers, background and foreground.</div></div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>The terminal shows "Creating default icons Android", "Creating adaptive icons Android", "Overwriting default iOS launcher icon with new icon" and "✓ Successfully generated launcher icons". The line "No platform provided" is normal: it is about web / Windows / macOS, which we did not ask for. Open <code>mipmap-anydpi-v26/ic_launcher.xml</code> to show the two layers. If you use Git, it also shows a small change in <code>ios/Runner.xcodeproj/project.pbxproj</code>, made by the tool.</p></aside>
 </section>
@@ -459,7 +459,7 @@
         </div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>On Android, long-press the app icon → App info → Uninstall, or drag it to "Uninstall". Phone launchers keep icons in a cache, which is why uninstalling helps. Compare two emulators with different icon shapes to show the adaptive icon at work.</p></aside>
 </section>
@@ -509,7 +509,7 @@
         </div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>Only change <code>android:label</code> and <code>CFBundleDisplayName</code>, not the package name or <code>CFBundleName</code>. Arabic works too: <code>android:label="متجر طرابلس"</code>. A name that changes with the phone's language needs extra native files; we do not need that today.</p></aside>
 </section>
@@ -544,7 +544,7 @@
         <div class="qa__big grad-text" style="font-size:4.2cqw;">Questions?</div>
       </div>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>Quick check: "Why did the logo get cut on Android?" (It was outside the safe zone.) "Why does the icon not change after hot reload?" (Icons are installed with the app.)</p></aside>
 </section>
@@ -583,7 +583,7 @@
         <p>for Android 13 themed icons</p>
       </article>
     </div>
-    <footer class="foot"><span>Mobile App Development · Lecture 13</span><span class="num"></span></footer>
+    <footer class="foot"><span>Mobile App Development · Lecture 20</span><span class="num"></span></footer>
   </div></div>
   <aside class="notes"><p>1) Design an icon for your course app, export both pictures, configure and run the tool; done when it shows on an Android emulator and (with a Mac) on the iOS simulator. 2) Set <code>adaptive_icon_foreground_inset</code> to <code>25</code>, run the tool again, uninstall and run; done when you can describe how the logo changed inside the shape and picked the value that looks best. 3) Run the app on two emulators with different icon shapes; done when you have two screenshots and nothing important is cut off.</p><p>4) Change the name under the icon on Android and iOS; done when the home screen shows the new name. 5) A one-color (white on transparent) logo, <code>adaptive_icon_monochrome: "assets/icon/app_icon_monochrome.png"</code>, run the tool again; done when, on Android 13+ with "Themed icons" on, your icon changes color with the wallpaper.</p></aside>
 </section>
